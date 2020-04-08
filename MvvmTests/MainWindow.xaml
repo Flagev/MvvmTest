@@ -5,22 +5,56 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MvvmTests"
         xmlns:vm="clr-namespace:MvvmTests.ViewModels"
+        xmlns:conv="clr-namespace:MvvmTests.Converters"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         Closed="Window_Closed"
         >
-
+    <!--Zasoby=tworzenie instancji w XAML-->
     <Window.Resources>
         <vm:MainWindowViewModel x:Key="MainWindowViewModel" />
+        <conv:IntToStringConverter x:Key="IntToStringConverter" />
+        <conv:DoubleStringToString x:Key="DoubleStringToString" />
     </Window.Resources>
     <!--
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext> 
     -->
-    <WrapPanel DataContext="{StaticResource MainWindowViewModel}">
-        <TextBox Name="X" Text="{Binding X, Mode=TwoWay}" Width="200" IsEnabled="True"/>
-        <TextBox Name="Y" Text="{Binding Y, Mode=TwoWay}" Width="200"/>
-        <TextBox Name="Z" Text="{Binding Z, Mode=TwoWay}" Width="200"/>
-    </WrapPanel>
+    <Grid DataContext="{StaticResource MainWindowViewModel}" Margin="10" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Simple DataBinding"/>
+        <!--Row 0-->
+        <TextBox Grid.Column="1" Name="X" Text="{Binding X, Mode=TwoWay}"  IsEnabled="True"/>
+        <TextBox Grid.Column="2" Name="Y" Text="{Binding Y, Mode=TwoWay}" />
+        <TextBox Grid.Column="3" Name="Z" Text="{Binding Z, Mode=TwoWay}" />
+        <!--Row 1-->
+        <Label  Grid.Row="1" Grid.Column="0"  Content="DataBinding with int-string Converter"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Name="Number" Text="{Binding Number, Mode=TwoWay, Converter={StaticResource IntToStringConverter}}"  IsEnabled="True"/>
+        <!--Row 2-->
+        <Label  Grid.Row="2" Grid.Column="0"  Content="MultiBinding"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3">
+            <TextBox.Text>
+                <MultiBinding  Converter="{StaticResource DoubleStringToString}" Mode="OneWay" >
+                    <Binding Path="X"/>
+                    <Binding Path="Y"/>
+                </MultiBinding>
+            </TextBox.Text>
+        </TextBox>
+        <!--Row 3-->
+        <Label  Grid.Row="3" Grid.Column="0"  Content="CrossControlBinding"/>
+        <TextBox Name="cross1" Grid.Row="3" Grid.Column="1" Text="{Binding ElementName=Number,Path=Text}" />
+        <TextBox  Grid.Row="3" Grid.Column="2" Text="{Binding ElementName=cross1,Path=Text}" />
+    </Grid>
 </Window>

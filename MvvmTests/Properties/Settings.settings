@@ -11,5 +11,11 @@
     <Setting Name="Z" Type="System.String" Scope="User">
       <Value Profile="(Default)">0z</Value>
     </Setting>
+    <Setting Name="Number" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="Setting" Type="System.String" Scope="User">
+      <Value Profile="(Default)">wrarrrgh</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

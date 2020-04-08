@@ -9,11 +9,9 @@ using MvvmTests.Models;
 
 namespace MvvmTests.ViewModels
 {
-    public class MainWindowViewModel : INotifyPropertyChanged
+    public class MainWindowViewModel : ObservedObject
     {
 		readonly SettingsModel model = Settings.Load();
-		public event PropertyChangedEventHandler PropertyChanged;
-
 		public string X
 		{
 			get { return model.X; }
@@ -38,24 +36,18 @@ namespace MvvmTests.ViewModels
 				model.Z = value; OnPropertyChanged("Z"); 
 			}
 		}
-
-		protected void OnPropertyChanged(params string[] propertyName) 
+		public int Number
 		{
-			if (PropertyChanged != null) 
+			get { return model.Number; }
+			set
 			{
-				foreach (string s in propertyName)
-				{
-					PropertyChanged(this, new PropertyChangedEventArgs(s));
-				}
+				model.Number = value; OnPropertyChanged("Number");
 			}
 		}
-
 		public void Save() 
-		{
-			
+		{	
 			Settings.Save(model);
 		}
-
 	}
 }
 

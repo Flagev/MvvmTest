@@ -11,5 +11,6 @@ namespace MvvmTests.Models
         public string X { get; set; }
         public string Y { get; set; }
         public string Z { get; set; }
+        public int Number { get; set; }
     }
 }

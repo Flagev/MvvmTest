@@ -26,9 +26,10 @@ namespace MvvmTests
             Trace.WriteLine("Settings Save");
             Properties.Settings settings = Properties.Settings.Default;
 
-            settings.X = "czupkabra";
+            settings.X = model.X;
             settings.Y = model.Y;
             settings.Z = model.Z;
+            settings.Number = model.Number;
             settings.Save();
         }
     }
