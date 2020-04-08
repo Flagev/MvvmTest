@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MvvmTests.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="X" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0q</Value>
+    </Setting>
+    <Setting Name="Y" Type="System.String" Scope="User">
+      <Value Profile="(Default)">a</Value>
+    </Setting>
+    <Setting Name="Z" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0z</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
